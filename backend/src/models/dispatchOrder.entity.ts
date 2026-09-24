@@ -17,6 +17,8 @@ export class DispatchOrderEntity {
   @Column('float') freight!: number;
   @Column('float') estimatedFuelCost!: number;
   @Column('float') estimatedTollCost!: number;
+  @Column('float', { default: 0 }) estimatedLaborCost!: number;
   @Column() status!: string;
   @Column('float') profit!: number;
+  @Column({ nullable: true }) batchId?: string;
 }
