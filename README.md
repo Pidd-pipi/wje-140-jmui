@@ -18,6 +18,7 @@ Swagger 文档：http://localhost:19210/api-docs
 - /api/vehicles：车辆管理。
 - /api/drivers：司机管理。
 - /api/dispatch-orders：调度派单与状态流转。
+  - `POST /api/dispatch-orders/batch`：批量派单。请求体 `{ batchId, items[] }`；逐笔核对车辆/司机空闲状态、驾照及车险年检有效（须覆盖计划出发时间），并拦截同车或同司机与已有调度单或批内其他任务的时段重叠。任一笔不合格整批拒绝（400，返回每笔的 index 与原因），调度和资源状态不变；全部通过后统一生成不重复单号、写为 `Assigned`，车辆/司机置为 `OnTrip`，利润 = 运费 - 油费 - 过路费 - 人工（按月薪/30×行程天数，不足 1 天按 1 天）。相同 `batchId` 与内容重复提交幂等返回，不重复占用。
 - /api/maintenance-records：维保管理。
 - /api/fuel-records：油耗记录。
 - /api/cost-summaries：费用汇总与利润核算。

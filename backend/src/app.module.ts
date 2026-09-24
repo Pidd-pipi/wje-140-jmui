@@ -11,6 +11,7 @@ import { CostController } from './controllers/cost.controller';
 import { VehicleService } from './services/vehicle.service';
 import { DriverService } from './services/driver.service';
 import { DispatchService } from './services/dispatch.service';
+import { DispatchBatchValidator } from './services/dispatchBatchValidator.service';
 import { MaintenanceService } from './services/maintenance.service';
 import { FuelService } from './services/fuel.service';
 import { CostService } from './services/cost.service';
@@ -22,7 +23,7 @@ import { RateLimitMiddleware } from './middlewares/rateLimit.middleware';
 @Module({
   imports: [TypeOrmModule.forRoot(databaseConfig)],
   controllers: [HealthController, VehicleController, DriverController, DispatchController, MaintenanceController, FuelController, CostController],
-  providers: [VehicleService, DriverService, DispatchService, MaintenanceService, FuelService, CostService, AnalyticsService]
+  providers: [VehicleService, DriverService, DispatchService, DispatchBatchValidator, MaintenanceService, FuelService, CostService, AnalyticsService]
 })
 export class AppModule {
   configure(consumer: MiddlewareConsumer) {
